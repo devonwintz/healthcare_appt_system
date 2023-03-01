@@ -1,0 +1,11 @@
+# Ignore Byte-compiled / optimized / DLL files
+__pycache__/
+
+# Ignore all migrations
+/healthcare_system/migrations/
+
+# Ignore the default SQLite database.
+/db.sqlite3
+
+# Ignore ERD with .dot extension
+*.dot

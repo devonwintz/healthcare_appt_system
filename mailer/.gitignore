@@ -1,0 +1,8 @@
+# Ignore Byte-compiled / optimized / DLL files
+__pycache__/
+
+# Ignore Environment File
+.env
+
+# Ignore Virtual Environment Folder
+.venv

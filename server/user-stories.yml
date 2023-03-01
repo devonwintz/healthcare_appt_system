@@ -1,0 +1,24 @@
+User Account Management:
+  - Creating Account (Followed Logging In):
+    Description: As a prospective user, I would like to be able to register by creating an email address and a password in order to gain access.
+    Acceptance Criteria:
+      - As a new user, I should receive a confirmation email after going to the sign up page, entering a username and password, and clicking the sign up button.
+      - As a newly registered user who has confirmed my account, I should be able to successfully login using my credentials.
+    
+  - Updating Account:
+    Description: As a registered user, I would like to be able to update my password on demand.
+    Acceptance Criteria:
+      - As a registered user, I should be presented with an option to update my account login password.
+      - As a registered user, I should receive an email with a link to complete the password update, having requested the same.
+      - As a registered user, I should be able to click on "forget password" and receive the aforementioned email to update my password.
+
+Making An Appointment:
+  Description: As a registered user, I would like to be able to book an appointment.
+  Acceptance Criteria:
+    - As a logged in user, I should be presented with:>
+      - A list of categories/specializations (Dermatology)
+      - A corresponding list of doctors for the selected category
+      - An interactive calendar to select an available date (booked dates should be grayed out)
+      - After successfully scheduling an appointment, both the patient and doctor should receive an email with the appointment information.
+      - The email received by the patient should contain a "confirmation" link
+ 

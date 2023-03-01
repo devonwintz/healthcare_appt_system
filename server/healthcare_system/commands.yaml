@@ -1,0 +1,13 @@
+Generate ERD:
+  - $ python manage.py graph_models -a > erd.dot
+  - $ dot -Tpdf erd.dot -o erd.pdf
+
+Reset Database:
+  - $ python  manage.py reset_db
+  - $ python manage.py migrate
+
+Create Superuser:
+  - $ python manage.py createsuperuser
+
+Truncate Table:
+  - $ python manage.py truncate --apps healthcare_system --models table_name

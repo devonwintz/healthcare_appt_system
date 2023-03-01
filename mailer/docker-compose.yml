@@ -1,0 +1,35 @@
+version: "3.8"
+
+services:
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    container_name: rabbitmq
+    ports:
+      - 5672:5672
+      - 15672:15672
+      - 15692:15692
+  
+  mailer:
+    build: 
+      context: ./
+      dockerfile: mailer.Dockerfile
+    image: mailer
+    container_name: mailer
+    ports:
+      - 5000:5000
+    volumes:
+      - ./usr/src/app
+    command: python app.py
+
+  rabbitmqConsumer:
+    build: 
+      context: ./consumer
+      dockerfile: consumer.Dockerfile
+    depends_on:
+      - rabbitmq
+    image: rabbitmq_consumer
+    container_name: rabbitmq_consumer
+    network: host
+    volumes:
+      - ./usr/src/app
+    command: python consumer.py
