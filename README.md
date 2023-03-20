@@ -14,10 +14,45 @@ This is a simple Patient Appointment Scheduling System, that makes it easy for S
 * Mailer - a custom mailing app developed with Flask
 
 ## Setup <a id="setup"></a>
-Setup section.
+1. Install Pipenv if not already installed
+```
+$ pip install pipenv
+```
+2. Activate Virtual Environment
+```
+$ pipenv shell
+```
+3. Install app dependencies
+```
+$ pipenv install
+```
+4. Propagate changes made to DB models (or simply create migrations)
+```
+$ python manage.py makemigrations healthcare_system
+$ python manage.py migrate
+```
+5. Start the development server
+```
+$ python manage.py runserver
+```
 
-## Contributing <a id="contributing"></a>
-Contributing section
+Other commands
+
+i. Generate ERD:
+```
+$ python manage.py graph_models -a > erd.dot
+$ dot -Tpdf erd.dot -o erd.pdf
+```
+ii. Reset Database:
+```
+$ python  manage.py reset_db
+$ python manage.py migrate
+```
+iii. Truncate Table:
+ ```
+ $ python manage.py truncate --apps healthcare_system --models table_name
+```
+
 
 ## Support <a id="support"></a>
 * [Django Documentation](https://docs.djangoproject.com/en/4.1/)
