@@ -44,20 +44,20 @@ class PatientView(APIView):
 
         try:
             patient = Patient.objects.get(pk=id)
+            if request.method == 'GET':
+                serializer = PatientSerializer(patient)
+                return Response(serializer.data)
+            elif request.method == 'PUT':
+                serializer = PatientSerializer(patient, data=request.data)
+                if serializer.is_valid():
+                    serializer.save()
+                    return Response(serializer.data)
+                else:
+                    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+            elif request.method == 'DELETE':
+                patient.delete()
+                return Response(status=status.HTTP_204_NO_CONTENT)
         except Patient.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
 
-        if request.method == 'GET':
-            serializer = PatientSerializer(patient)
-            return Response(serializer.data)
-        elif request.method == 'PUT':
-            serializer = PatientSerializer(patient, data=request.data)
-            if serializer.is_valid():
-                serializer.save()
-                return Response(serializer.data)
-            else:
-                return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-        elif request.method == 'DELETE':
-            patient.delete()
-            return Response(status=status.HTTP_204_NO_CONTENT)
 

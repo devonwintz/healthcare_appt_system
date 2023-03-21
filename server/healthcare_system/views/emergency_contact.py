@@ -44,20 +44,19 @@ class EmergencyContactView(APIView):
 
         try:
             emergency_contact = Emergency_Contact.objects.get(pk=id)
+            if request.method == 'GET':
+                serializer = EmergencyContactSerializer(emergency_contact)
+                return Response(serializer.data)
+            elif request.method == 'PUT':
+                serializer = EmergencyContactSerializer(
+                    emergency_contact, data=request.data)
+                if serializer.is_valid():
+                    serializer.save()
+                    return Response(serializer.data)
+                else:
+                    return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+            elif request.method == 'DELETE':
+                emergency_contact.delete()
+                return Response(status=status.HTTP_204_NO_CONTENT)
         except Emergency_Contact.DoesNotExist:
             return Response(status=status.HTTP_404_NOT_FOUND)
-
-        if request.method == 'GET':
-            serializer = EmergencyContactSerializer(emergency_contact)
-            return Response(serializer.data)
-        elif request.method == 'PUT':
-            serializer = EmergencyContactSerializer(
-                emergency_contact, data=request.data)
-            if serializer.is_valid():
-                serializer.save()
-                return Response(serializer.data)
-            else:
-                return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-        elif request.method == 'DELETE':
-            emergency_contact.delete()
-            return Response(status=status.HTTP_204_NO_CONTENT)
