@@ -44,6 +44,9 @@ class SpecializationView(APIView):
 
         try:
             speicalization = Specialization.objects.get(pk=id)
+        except Specialization.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+        else:
             if request.method == 'GET':
                 serializer = SpecializationSerializer(speicalization)
                 return Response(serializer.data)
@@ -57,5 +60,3 @@ class SpecializationView(APIView):
             elif request.method == 'DELETE':
                 speicalization.delete()
                 return Response(status=status.HTTP_204_NO_CONTENT)
-        except Doctor.DoesNotExist:
-            return Response(status=status.HTTP_404_NOT_FOUND)

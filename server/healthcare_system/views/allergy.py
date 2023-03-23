@@ -43,7 +43,10 @@ class AllergyView(APIView):
         """
 
         try:
-            allergy = Allergy.objects.get(pk=id)
+            allergy = Allergy.objects.get(pk=id)  
+        except Allergy.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+        else:
             if request.method == 'GET':
                 serializer = AllergySerializer(allergy)
                 return Response(serializer.data)
@@ -57,7 +60,5 @@ class AllergyView(APIView):
                     return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
             elif request.method == 'DELETE':
                 allergy.delete()
-                return Response(status=status.HTTP_204_NO_CONTENT)    
-        except Allergy.DoesNotExist:
-            return Response(status=status.HTTP_404_NOT_FOUND)
+                return Response(status=status.HTTP_204_NO_CONTENT)  
 

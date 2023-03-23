@@ -55,6 +55,9 @@ class AppointmentView(APIView):
 
         try:
             appointment = Appointment.objects.get(pk=id)
+        except Appointment.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+        else:
             if request.method == 'GET':
                 serializer = AppointmentSerializer(appointment)
                 return Response(serializer.data)
@@ -69,5 +72,3 @@ class AppointmentView(APIView):
             elif request.method == 'DELETE':
                 appointment.delete()
                 return Response(status=status.HTTP_204_NO_CONTENT)
-        except Appointment.DoesNotExist:
-            return Response(status=status.HTTP_404_NOT_FOUND)
