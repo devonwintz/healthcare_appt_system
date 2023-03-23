@@ -44,6 +44,9 @@ class EmergencyContactView(APIView):
 
         try:
             emergency_contact = Emergency_Contact.objects.get(pk=id)
+        except Emergency_Contact.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+        else:
             if request.method == 'GET':
                 serializer = EmergencyContactSerializer(emergency_contact)
                 return Response(serializer.data)
@@ -58,5 +61,3 @@ class EmergencyContactView(APIView):
             elif request.method == 'DELETE':
                 emergency_contact.delete()
                 return Response(status=status.HTTP_204_NO_CONTENT)
-        except Emergency_Contact.DoesNotExist:
-            return Response(status=status.HTTP_404_NOT_FOUND)

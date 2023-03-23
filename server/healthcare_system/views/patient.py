@@ -44,6 +44,9 @@ class PatientView(APIView):
 
         try:
             patient = Patient.objects.get(pk=id)
+        except Patient.DoesNotExist:
+            return Response(status=status.HTTP_404_NOT_FOUND)
+        else:
             if request.method == 'GET':
                 serializer = PatientSerializer(patient)
                 return Response(serializer.data)
@@ -57,7 +60,5 @@ class PatientView(APIView):
             elif request.method == 'DELETE':
                 patient.delete()
                 return Response(status=status.HTTP_204_NO_CONTENT)
-        except Patient.DoesNotExist:
-            return Response(status=status.HTTP_404_NOT_FOUND)
 
 
