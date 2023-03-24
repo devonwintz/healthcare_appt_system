@@ -21,6 +21,12 @@ class SpecializationSerializer(serializers.ModelSerializer):
         fields = ['id', 'name', 'created_by', 'created', 'updated_by', 'updated']
 
 class EmergencyContactSerializer(serializers.ModelSerializer):
+    patient = serializers.SlugRelatedField(
+    many=True, 
+    read_only=True,
+    slug_field = "patient_details"
+    )
+
     class Meta:
         model = Emergency_Contact
         fields = ['id', 'patient', 'first_name', 'last_name', 'relationship', 'telephone', 'email',
