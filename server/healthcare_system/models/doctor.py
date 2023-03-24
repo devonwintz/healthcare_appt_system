@@ -20,6 +20,7 @@ class Doctor(models.Model):
     @property
     def doctor_details(self):
         return {
+            'id': self.id,
             'first_name': self.first_name,
             'last_name': self.last_name,
             'specialization': self.specialization.values_list('name', flat=True),
