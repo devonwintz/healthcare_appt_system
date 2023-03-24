@@ -9,6 +9,11 @@ class PatientSerializer(serializers.ModelSerializer):
                   'address_line_2', 'ward_village', 'city', 'country', 'created_by', 'created', 'updated_by', 'updated']
 
 class DoctorSerializer(serializers.ModelSerializer):
+    specialization = serializers.SlugRelatedField(
+    many=True, 
+    read_only=True,
+    slug_field = "specialization_details"
+    )
 
     class Meta:
         model = Doctor
@@ -33,6 +38,12 @@ class EmergencyContactSerializer(serializers.ModelSerializer):
                   'created_by', 'created', 'updated_by', 'updated']
 
 class AllergySerializer(serializers.ModelSerializer):
+    patient = serializers.SlugRelatedField(
+    many=False, 
+    read_only=True,
+    slug_field = "patient_details"
+    )
+
     class Meta:
         model = Allergy
         fields = ['id', 'patient', 'name', 'symptom', 'medication',
