@@ -20,7 +20,8 @@ class Doctor(models.Model):
     @property
     def doctor_details(self):
         return {
-            'fullname': self.first_name+" "+self.last_name,
+            'first_name': self.first_name,
+            'last_name': self.last_name,
             'specialization': self.specialization.values_list('name', flat=True),
             'email': self.email,
             'telephone': self.telephone,
