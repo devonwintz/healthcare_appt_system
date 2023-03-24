@@ -23,8 +23,9 @@ class Patient(models.Model):
     @property
     def patient_details(self):
         return {
-            'firstname': self.first_name,
-            'lastname': self.last_name,
+            'id': self.id,
+            'first_name': self.first_name,
+            'last_name': self.last_name,
             'sex': self.sex,
             'dob': self.dob,
             'telephone': self.telephone,

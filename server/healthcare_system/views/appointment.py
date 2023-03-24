@@ -24,7 +24,7 @@ class AppointmentView(APIView):
             # Get all appointment records
             appointments = Appointment.objects.all()
             # Serialize the list of appoimment records
-            serializer = AppointmentSerializer(appointments, many=True)
+            serializer = AppointmentSerializer_(appointments, many=True)
             # Return the serialized appointment data
             return Response(serializer.data)
 
@@ -39,7 +39,7 @@ class AppointmentView(APIView):
                 # Serialize the appointment that contains additional properties
                 serializer = AppointmentSerializer_(appointment)
                 # Add message to emailer queue
-                Publisher(config).publish('emailer', json.dumps(serializer.data, cls=DatetimeEncoder))
+                # Publisher(config).publish('emailer', json.dumps(serializer.data, cls=DatetimeEncoder))
                 return Response(serializer.data, status=status.HTTP_201_CREATED)
             else:
                 return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
