@@ -19,7 +19,7 @@ class AllergyView(APIView):
             # Get all allergy records
             allergies = Allergy.objects.all()
             # Serialize the list of allergy records
-            serializer = AllergySerializer(allergies, many=True)
+            serializer = AllergySerializer_(allergies, many=True)
             # Return the serialized allergy data
             return Response(serializer.data)
 
@@ -48,7 +48,7 @@ class AllergyView(APIView):
             return Response(status=status.HTTP_404_NOT_FOUND)
         else:
             if request.method == 'GET':
-                serializer = AllergySerializer(allergy)
+                serializer = AllergySerializer_(allergy)
                 return Response(serializer.data)
             elif request.method == 'PUT':
                 serializer = AllergySerializer(

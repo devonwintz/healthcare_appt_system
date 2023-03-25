@@ -37,7 +37,7 @@ class AppointmentView(APIView):
                 # Get the saved appointment record
                 appointment = Appointment.objects.get(id=appt.id)
                 # Serialize the appointment that contains additional properties
-                serializer = AppointmentSerializer_(appointment)
+                serializer = AppointmentSerializer(appointment)
                 # Add message to emailer queue
                 # Publisher(config).publish('emailer', json.dumps(serializer.data, cls=DatetimeEncoder))
                 return Response(serializer.data, status=status.HTTP_201_CREATED)
@@ -59,7 +59,7 @@ class AppointmentView(APIView):
             return Response(status=status.HTTP_404_NOT_FOUND)
         else:
             if request.method == 'GET':
-                serializer = AppointmentSerializer(appointment)
+                serializer = AppointmentSerializer_(appointment)
                 return Response(serializer.data)
             elif request.method == 'PUT':
                 serializer = AppointmentSerializer(

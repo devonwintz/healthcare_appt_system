@@ -13,6 +13,7 @@ class Specialization(models.Model):
     @property
     def specialization_details(self):
         return {
+            'id': self.id,
             'name': self.name,
         }
 
