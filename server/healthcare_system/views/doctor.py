@@ -19,7 +19,7 @@ class DoctorView(APIView):
             # Get all doctors records
             doctors = Doctor.objects.all()
             # Serialize the list of doctor records
-            serializer = DoctorSerializer(doctors, many=True)
+            serializer = DoctorSerializer_(doctors, many=True)
             # Return the serialized doctor data
             return Response(serializer.data)
 
@@ -48,7 +48,7 @@ class DoctorView(APIView):
             return Response(status=status.HTTP_404_NOT_FOUND)
         else:
             if request.method == 'GET':
-                serializer = DoctorSerializer(doctor)
+                serializer = DoctorSerializer_(doctor)
                 return Response(serializer.data)
             elif request.method == 'PUT':
                 serializer = DoctorSerializer(doctor, data=request.data)

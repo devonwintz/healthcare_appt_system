@@ -19,7 +19,7 @@ class EmergencyContactView(APIView):
             # Get all emergency contact records
             emergency_contacts = Emergency_Contact.objects.all()
             # Serialize the list of emergency contact records
-            serializer = EmergencyContactSerializer(emergency_contacts, many=True)
+            serializer = EmergencyContactSerializer_(emergency_contacts, many=True)
             # Return the serialized emergency contact data
             return Response(serializer.data)
 
@@ -48,7 +48,7 @@ class EmergencyContactView(APIView):
             return Response(status=status.HTTP_404_NOT_FOUND)
         else:
             if request.method == 'GET':
-                serializer = EmergencyContactSerializer(emergency_contact)
+                serializer = EmergencyContactSerializer_(emergency_contact)
                 return Response(serializer.data)
             elif request.method == 'PUT':
                 serializer = EmergencyContactSerializer(

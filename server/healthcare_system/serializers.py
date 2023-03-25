@@ -9,6 +9,12 @@ class PatientSerializer(serializers.ModelSerializer):
                   'address_line_2', 'ward_village', 'city', 'country', 'created_by', 'created', 'updated_by', 'updated']
 
 class DoctorSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Doctor
+        fields = ['id', 'first_name', 'last_name', 'specialization', 'telephone', 'email',
+                  'created_by', 'created', 'updated_by', 'updated']
+
+class DoctorSerializer_(serializers.ModelSerializer):
     specialization = serializers.SlugRelatedField(
     many=True, 
     read_only=True,
@@ -26,6 +32,12 @@ class SpecializationSerializer(serializers.ModelSerializer):
         fields = ['id', 'name', 'created_by', 'created', 'updated_by', 'updated']
 
 class EmergencyContactSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Emergency_Contact
+        fields = ['id', 'patient', 'first_name', 'last_name', 'relationship', 'telephone', 'email',
+                  'created_by', 'created', 'updated_by', 'updated']
+
+class EmergencyContactSerializer_(serializers.ModelSerializer):
     patient = serializers.SlugRelatedField(
     many=True, 
     read_only=True,
@@ -38,6 +50,12 @@ class EmergencyContactSerializer(serializers.ModelSerializer):
                   'created_by', 'created', 'updated_by', 'updated']
 
 class AllergySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Allergy
+        fields = ['id', 'patient', 'name', 'symptom', 'medication',
+                  'created_by', 'created', 'updated_by', 'updated']
+
+class AllergySerializer_(serializers.ModelSerializer):
     patient = serializers.SlugRelatedField(
     many=False, 
     read_only=True,
