@@ -63,10 +63,11 @@ iii. Truncate Table:
 ```
 
 ## Usage <a id="usage"></a>
-Base URL: `'https://devonwintz.pythonanywhere.com'`
+**baseURL**: `https://devonwintz.pythonanywhere.com`
 
-**Generate Access Token**
-URL: `baseURL/auth-token/`
+**Generating Access Token**
+
+**URL**: `baseURL/auth-token/`
 
 **Body**:
 ```
